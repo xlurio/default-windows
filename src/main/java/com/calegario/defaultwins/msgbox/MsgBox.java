@@ -8,8 +8,8 @@ import java.awt.event.*;
 import javax.swing.*;
 
 public class MsgBox extends JFrame {
-  int DEFAULT_WIDTH = 256;
-  int DEFAULT_HEIGHT = 128;
+  private int DEFAULT_WIDTH = 256;
+  private int DEFAULT_HEIGHT = 128;
   private BoxBtn button;
 
   public MsgBox(String title, String msg, int width, int height) {

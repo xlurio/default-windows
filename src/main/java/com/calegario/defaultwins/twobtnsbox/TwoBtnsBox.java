@@ -8,8 +8,8 @@ import java.awt.event.*;
 import javax.swing.*;
 
 public class TwoBtnsBox extends JFrame {
-  int DEFAULT_WIDTH = 256;
-  int DEFAULT_HEIGHT = 128;
+  private int DEFAULT_WIDTH = 256;
+  private int DEFAULT_HEIGHT = 128;
   private BoxBtn buttonOne;
   private BoxBtn buttonTwo;
   private JPanel mainPanel;
