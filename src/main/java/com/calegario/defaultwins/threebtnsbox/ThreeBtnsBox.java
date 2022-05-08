@@ -8,16 +8,26 @@ import java.awt.event.*;
 import javax.swing.*;
 
 public class ThreeBtnsBox extends JFrame {
-  private int DEFAULT_WIDTH = 256;
-  private int DEFAULT_HEIGHT = 128;
   private BoxBtn buttonOne;
   private BoxBtn buttonTwo;
   private BoxBtn buttonThree;
   private JPanel mainPanel;
 
+  public ThreeBtnsBox(){
+      this("Sample Title", "Three buttons box", "Button one", "Button two",
+           "Button three", 256, 128);
+  }
+
+  public ThreeBtnsBox(
+      String title, String msg, String btnOneAction, String btnTwoAction,
+      String btnThreeAction
+  ) {
+      this(title, msg, btnOneAction, btnTwoAction, btnThreeAction, 256, 128);
+  }
+
   public ThreeBtnsBox(
     String title, String msg, String btnOneAction, String btnTwoAction,
-    int width, int height
+    String btnThreeAction, int width, int height
   ) {
     super(title);
     this.buttonOne =
@@ -25,63 +35,13 @@ public class ThreeBtnsBox extends JFrame {
     this.buttonTwo =
       new BoxBtn(btnTwoAction, new DefaultActionListener(this));
     this.buttonThree =
-      new BoxBtn(btnTwoAction, new DefaultActionListener(this));
+      new BoxBtn(btnThreeAction, new DefaultActionListener(this));
 
     this.mainPanel = new JPanel();
     this.mainPanel.setLayout(new BoxLayout(this.mainPanel, BoxLayout.Y_AXIS));
     this.mainPanel.setSize(width, height);
     this.mainPanel.setAlignmentX(Component.CENTER_ALIGNMENT);
     this.mainPanel.add(new BoxMsg(msg));
-    this.mainPanel.add(this.buttonOne);
-    this.mainPanel.add(this.buttonTwo);
-    this.mainPanel.add(this.buttonThree);
-
-    add(this.mainPanel);
-    setSize(this.mainPanel.getWidth(), this.mainPanel.getHeight());
-    setResizable(false);
-    setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-  }
-
-  public ThreeBtnsBox(
-    String title, String msg, String btnOneAction, String btnTwoAction
-  ) {
-    super(title);
-    this.buttonOne =
-      new BoxBtn(btnOneAction, new DefaultActionListener(this));
-    this.buttonTwo =
-      new BoxBtn(btnTwoAction, new DefaultActionListener(this));
-    this.buttonThree =
-      new BoxBtn(btnTwoAction, new DefaultActionListener(this));
-
-    this.mainPanel = new JPanel();
-    this.mainPanel.setLayout(new BoxLayout(this.mainPanel, BoxLayout.Y_AXIS));
-    this.mainPanel.setSize(this.DEFAULT_WIDTH, this.DEFAULT_WIDTH);
-    this.mainPanel.setAlignmentX(Component.CENTER_ALIGNMENT);
-    this.mainPanel.add(new BoxMsg(msg));
-    this.mainPanel.add(this.buttonOne);
-    this.mainPanel.add(this.buttonTwo);
-    this.mainPanel.add(this.buttonThree);
-
-    add(this.mainPanel);
-    setSize(this.mainPanel.getWidth(), this.mainPanel.getHeight());
-    setResizable(false);
-    setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-  }
-
-  public ThreeBtnsBox() {
-    super("Sample Title");
-    this.buttonOne =
-      new BoxBtn("Button one", new DefaultActionListener(this));
-    this.buttonTwo =
-      new BoxBtn("Button two", new DefaultActionListener(this));
-    this.buttonThree =
-      new BoxBtn("Button three", new DefaultActionListener(this));
-
-    this.mainPanel = new JPanel();
-    this.mainPanel.setLayout(new BoxLayout(this.mainPanel, BoxLayout.Y_AXIS));
-    this.mainPanel.setSize(this.DEFAULT_WIDTH, this.DEFAULT_WIDTH);
-    this.mainPanel.setAlignmentX(Component.CENTER_ALIGNMENT);
-    this.mainPanel.add(new BoxMsg("Three buttons box"));
     this.mainPanel.add(this.buttonOne);
     this.mainPanel.add(this.buttonTwo);
     this.mainPanel.add(this.buttonThree);
@@ -115,5 +75,16 @@ public class ThreeBtnsBox extends JFrame {
 
   public void showBox(){
     setVisible(true);
+  }
+
+  public BoxBtn getBtnThree(){
+      return buttonThree;
+  }
+
+  public void setBtnThree(BoxBtn newBtn){
+      mainPanel.remove(buttonThree);
+      mainPanel.add(newBtn);
+      revalidate();
+      repaint();
   }
 }
