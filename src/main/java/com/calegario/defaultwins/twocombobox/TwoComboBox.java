@@ -15,17 +15,19 @@ public class TwoComboBox extends JFrame {
         this(
             "Sample window with two combo boxes",
             "Sample window with two combo boxes",
+            true,
             new String[]{"Dog", "Cat", "Furret"},
             new String[]{"Male", "Female"}
         );
     }
 
-    public TwoComboBox(String title, String msg, String[] listOfOptions1,
-                       String[] listOfOptions2) {
-        this(title, msg, listOfOptions1, listOfOptions2, 256, 192);
+    public TwoComboBox(String title, String msg, boolean doExitOnClose,
+                       String[] listOfOptions1, String[] listOfOptions2) {
+        this(title, msg, doExitOnClose, listOfOptions1, listOfOptions2,
+             256, 192);
     }
 
-    public TwoComboBox(String title, String msg, String[] listOfOptions1,
+    public TwoComboBox(String title, String msg, boolean doExitOnClose, String[] listOfOptions1,
                        String[] listOfOptions2, int width, int height) {
         super(title);
         combo1 = new BoxCombo(listOfOptions1);
@@ -44,7 +46,12 @@ public class TwoComboBox extends JFrame {
         add(mainPanel);
         setSize(mainPanel.getWidth(), mainPanel.getHeight());
         setResizable(false);
-        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        if (doExitOnClose){
+            setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        } else {
+            setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+        }
+
     }
 
     public void setBtnListener(ActionListener listener){

@@ -8,72 +8,42 @@ import java.awt.event.*;
 import javax.swing.*;
 
 public class InputBox extends JFrame{
-  int DEFAULT_WIDTH = 256;
-  int DEFAULT_HEIGHT = 128;
   private InputBoxField textField;
   private BoxBtn button;
   private JPanel mainPanel;
 
-  public InputBox(String title, String msg, int width, int height){
-    super(title);
-    this.textField = new InputBoxField();
-    this.button = new BoxBtn("OK", new DefaultActionListener(this));
+    public InputBox() {
+        this("Sample Title", "This is a input box", true, 256, 128);
+    }
 
-    this.mainPanel = new JPanel();
-    this.mainPanel.setLayout(new BoxLayout(this.mainPanel, BoxLayout.Y_AXIS));
-    this.mainPanel.setSize(width, height);
-    this.mainPanel.setAlignmentX(Component.CENTER_ALIGNMENT);
-    this.mainPanel.setAlignmentY(Component.CENTER_ALIGNMENT);
-    this.mainPanel.add(new BoxMsg(msg));
-    this.mainPanel.add(this.textField);
-    this.mainPanel.add(this.button);
+    public InputBox(String title, String msg, boolean doExitOnClose) {
+        this(title, msg, doExitOnClose, 256, 128);
+    }
 
-    add(this.mainPanel);
-    getRootPane().setDefaultButton(this.button.getButton());
-    setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-    setResizable(false);
-    setSize(this.mainPanel.getWidth(), this.mainPanel.getHeight());
-  }
+    public InputBox(String title, String msg, boolean doExitOnClose, int width, int height){
+        super(title);
+        this.textField = new InputBoxField();
+        this.button = new BoxBtn("OK", new DefaultActionListener(this));
 
-  public InputBox(String title, String msg) {
-    super(title);
-    this.textField = new InputBoxField();
-    this.button = new BoxBtn("OK", new DefaultActionListener(this));
+        this.mainPanel = new JPanel();
+        this.mainPanel.setLayout(new BoxLayout(this.mainPanel, BoxLayout.Y_AXIS));
+        this.mainPanel.setSize(width, height);
+        this.mainPanel.setAlignmentX(Component.CENTER_ALIGNMENT);
+        this.mainPanel.setAlignmentY(Component.CENTER_ALIGNMENT);
+        this.mainPanel.add(new BoxMsg(msg));
+        this.mainPanel.add(this.textField);
+        this.mainPanel.add(this.button);
 
-    this.mainPanel = new JPanel();
-    this.mainPanel.setLayout(new BoxLayout(this.mainPanel, BoxLayout.Y_AXIS));
-    this.mainPanel.setSize(this.DEFAULT_WIDTH, this.DEFAULT_HEIGHT);
-    this.mainPanel.setAlignmentX(Component.CENTER_ALIGNMENT);
-    this.mainPanel.add(new BoxMsg(msg));
-    this.mainPanel.add(this.textField);
-    this.mainPanel.add(this.button);
-
-    add(this.mainPanel);
-    getRootPane().setDefaultButton(this.button.getButton());
-    setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-    setResizable(false);
-    setSize(this.mainPanel.getWidth(), this.mainPanel.getHeight());
-  }
-
-  public InputBox(){
-    super("Sample Title");
-    this.textField = new InputBoxField();
-    this.button = new BoxBtn("OK", new DefaultActionListener(this));
-
-    this.mainPanel = new JPanel();
-    this.mainPanel.setLayout(new BoxLayout(this.mainPanel, BoxLayout.Y_AXIS));
-    this.mainPanel.setSize(this.DEFAULT_WIDTH, this.DEFAULT_HEIGHT);
-    this.mainPanel.setAlignmentX(Component.CENTER_ALIGNMENT);
-    this.mainPanel.add(new BoxMsg("This is a input box"));
-    this.mainPanel.add(this.textField);
-    this.mainPanel.add(this.button);
-
-    add(this.mainPanel);
-    getRootPane().setDefaultButton(this.button.getButton());
-    setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-    setResizable(false);
-    setSize(this.mainPanel.getWidth(), this.mainPanel.getHeight());
-  }
+        add(this.mainPanel);
+        getRootPane().setDefaultButton(this.button.getButton());
+        if (doExitOnClose){
+            setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        } else {
+            setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+        }
+        setResizable(false);
+        setSize(this.mainPanel.getWidth(), this.mainPanel.getHeight());
+    }
 
   public void setBtnListener(ActionListener listener){
     mainPanel.remove(button);
