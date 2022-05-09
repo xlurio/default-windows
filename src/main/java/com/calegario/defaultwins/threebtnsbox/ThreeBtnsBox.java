@@ -14,20 +14,21 @@ public class ThreeBtnsBox extends JFrame {
   private JPanel mainPanel;
 
   public ThreeBtnsBox(){
-      this("Sample Title", "Three buttons box", "Button one", "Button two",
-           "Button three", 256, 128);
+      this("Sample Title", "Three buttons box", true, "Button one",
+           "Button two", "Button three", 256, 128);
   }
 
   public ThreeBtnsBox(
-      String title, String msg, String btnOneAction, String btnTwoAction,
-      String btnThreeAction
+      String title, String msg, boolean doExitOnClose, String btnOneAction,
+      String btnTwoAction, String btnThreeAction
   ) {
-      this(title, msg, btnOneAction, btnTwoAction, btnThreeAction, 256, 128);
+      this(title, msg, doExitOnClose, btnOneAction, btnTwoAction,
+           btnThreeAction, 256, 128);
   }
 
   public ThreeBtnsBox(
-    String title, String msg, String btnOneAction, String btnTwoAction,
-    String btnThreeAction, int width, int height
+    String title, String msg, boolean doExitOnClose, String btnOneAction,
+    String btnTwoAction, String btnThreeAction, int width, int height
   ) {
     super(title);
     this.buttonOne =
@@ -49,7 +50,11 @@ public class ThreeBtnsBox extends JFrame {
     add(this.mainPanel);
     setSize(this.mainPanel.getWidth(), this.mainPanel.getHeight());
     setResizable(false);
-    setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+    if (doExitOnClose) {
+        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+    } else {
+        setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+    }
   }
 
   public void setBtnOneListener(ActionListener listener){
