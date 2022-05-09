@@ -88,8 +88,9 @@ public class ThreeBtnsBox extends JFrame {
 
   public void setBtnThree(BoxBtn newBtn){
       mainPanel.remove(buttonThree);
-      mainPanel.add(newBtn);
-      revalidate();
-      repaint();
+      buttonThree = newBtn;
+      mainPanel.add(buttonThree);
+      mainPanel.revalidate();
+      mainPanel.repaint();
   }
 }
